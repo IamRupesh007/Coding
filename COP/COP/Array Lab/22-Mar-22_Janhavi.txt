@@ -1,0 +1,238 @@
+Good afternoon!!
+
+Target topic: 2-d array in Java
+
+
+C                and   Java
+Pointer                No pointers
+
+
+1. In C array is constant pointer
+2. arr[i] = compiler converts this *(arr+i)
+3. print arr, means it will base address of array arr.
+
+
+_________________________________________________________
+
+arr[i] means *(arr+i)
+
+arr[i][j] means *(*(arr+i)+j)
+
+
+#include<stdio.h>
+
+int main()
+{
+   int arr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+   int i,j;
+   for(i=0;i<3;i++)
+   {
+     printf("\n arr[%d] = %d",i,arr[i]);
+     printf("\n *(arr + %d) = %d",i,*(arr+i));
+     for(j=0;j<3;j++)
+     {
+        printf("\n (*(arr+%d)+%d) = %d",i,j,(*(arr+i)+j));//&arr[i][j]
+        printf("\n *(*(arr+%d)+%d) = %d",i,j,*(*(arr+i)+j));
+     }
+   }
+   return 0;
+}
+
+
+
+Addition of 2 matrices and store the result in matrix res
+
+int main()
+{
+  int i,j;
+  int arr1[2][2]={{1,2},{3,4}};
+  int arr2[2][2]={{6,7},{8,9}};
+  int res[2][2];
+  
+  for(i=0;i<2;i++)
+  {
+    for(j=0;j<2;j++)
+    {
+       res[i][j]=arr1[i][j]+arr2[i][j];
+    }
+  }
+
+  for(i=0;i<2;i++)
+  {
+    for(j=0;j<2;j++)
+    {
+       printf("  %d",res[i][j]);
+    }
+    printf("\n");
+  }
+
+  for(i=0;i<2;i++)
+  {
+    for(j=0;j<2;j++)
+    {
+       if(i==j)
+         printf("  %d",res[i][j]);
+    }
+    //printf("\n");
+  }
+  return 0;
+}
+
+_______________________________________________________________________
+
+
+ 3-d array
+
+#include<stdio.h>
+int main()
+{
+  int arr[2][2][2]={{{1,2},{3,4}},{{5,6},{7,8}}};
+  int i,j,k;
+  printf("\n arr = %d",arr); 
+  for(i=0;i<2;i++)
+  {
+     printf("\n arr[%d] = %d",i,arr[i]);
+     for(j=0;j<2;j++)
+     {
+       printf("\n arr[%d][%d] = %d",i,j,arr[i][j]);
+       for(k=0;k<2;k++)
+       {
+         printf("\n (*(*(arr+%d)+%d)+%d) = %d",i,j,k,(*(arr+i)+j)+k));//&arr[i][j][k]
+         printf("\n *(*(*(arr+%d)+%d)+%d) = %d",i,j,k,*(*(*(arr+i)+j)+k));arr[i][j][k] 
+       } 
+     }
+   }
+   
+   return 0;
+}
+
+_________________________________________
+
+
+to pass 2-d array into function
+
+#include<stdio.h>
+int main()
+{
+   int twoarr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+
+   void disp_arr(int *); 
+  
+   void disp_2d_array(int ptr[][3]); //correct
+   //void disp_2d_array(int (*ptr)[3]); //correct
+   void disp_2d_array(int **ptr) //wrong
+
+
+   disp_2d_array(twoarr);  //function call
+
+  
+   disp_arr((int *)twoarr);
+
+   return 0;
+}
+
+
+void disp_arr(int *ptr)
+{
+  int i;
+  for(i=0;i<3;i++)
+  {
+    for(j=0;j<3;j++)
+    {
+       printf(" \n %d",*((ptr+i*3)+j));//ptr[i][j] wrong
+    }
+  }
+
+}
+
+
+void disp_2d_array(int (*ptr)[3]) //int ptr[][3]
+{
+   int i,j;
+   for(i=0;i<3;i++)
+   {
+    for(j=0;j<3;j++)
+    {
+       printf("  %d",ptr[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+
+
+
+
+
+________________________________________________________
+
+
+to pass 3-d array into function
+
+#include<stdio.h>
+int main()
+{
+   int threearr[2][2][2]={{{1,2},{3,4}},{{4,5},{6,7}}};
+
+   void disp_arr(int *); 
+  
+   void disp_3d_array(int ptr[][2][2]); //correct
+   //void disp_2d_array(int (*ptr)[2][2]); //correct
+   void disp_2d_array(int ***ptr) //wrong
+
+
+   disp_3d_array(threearr);  //function call
+
+  
+   disp_arr((int *)threearr);
+
+   return 0;
+}
+
+
+void disp_arr(int *ptr)
+{
+  int i;
+  for(i=0;i<2;i++)
+  {
+    for(j=0;j<2;j++)
+    {
+      for(k=0;k<2;k++)
+       printf(" \n %d",*(((ptr+i*2*2)+j*2)+k));//ptr[i][j][k] wrong
+    }
+  }
+
+}
+
+
+void disp_3d_array(int (*ptr)[2][2]) //int ptr[][2][2]
+{
+   int i,j,k;
+   for(i=0;i<2;i++)
+   {
+    for(j=0;j<2;j++)
+    {
+      for(k=0;k<2;k++)
+      { 
+         printf("  %d",ptr[i][j][k]);
+      }
+    }
+    printf("\n");
+  }
+}
+
+________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+

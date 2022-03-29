@@ -1,0 +1,4 @@
+INDEX VERSION 1.130+D:\IET Data\Java_IET\.metadata\.plugins\org.eclipse.jdt.core
+465608017.index
+80914538.index
+1205824980.index
